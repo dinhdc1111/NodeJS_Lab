@@ -1,27 +1,24 @@
 {
-  "name": "nodejs",
+  "name": "nodejs_fall2022",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon --inspect app.js",
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dinhdc1111/NodeJS_Lab.git"
   },
-  "keywords": [
-    "NodeJS",
-    "FPL"
-  ],
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/dinhdc1111/NodeJS_Lab/issues"
   },
   "homepage": "https://github.com/dinhdc1111/NodeJS_Lab#readme",
-  "dependencies": {
-    "express": "^4.18.2"
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }
