@@ -1,4 +1,5 @@
 import express from "express";
+import homeRoute from "./router/homeRoute";
 
 const app = express();
 app.use(express.json())
@@ -6,6 +7,8 @@ app.use(express.json())
         {id: 1, name: "Product 1", price : 2000},
         {id: 2, name: "Product 2", price : 2000},
     ];
+//router
+app.use(homeRoute);
 // Products list
 app.get("/products", (req, res) => {
     res.json(products)
