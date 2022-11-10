@@ -1,11 +1,18 @@
 import Product from "../models/product"
-export const getAllProducts = (req, res) => {
-    res.json(products)
+export const getAllProducts = async (req, res) => {
+    try {
+        const products = await Product.find({}).exec();
+        res.json(products);
+    } catch (error) {
+        res.status(400).json({
+            message: "Product not found"
+        })
+    }
 }
-export const getProduct = (req, res) => {
+export const getProduct = async (req, res) => {
     try {
         const id = req.params.id;
-        const product = products.find(item => item.id == id);
+        const product = await Product.findOne({_id: id}).exec();
         res.status(200).json({product})
     } catch (error) {
         res.status(400).json({
