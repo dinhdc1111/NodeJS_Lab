@@ -1,8 +1,4 @@
-// fake data
-const products = [
-    {id: 1, name: "Product 1", price : 2000},
-    {id: 2, name: "Product 2", price : 2000},
-];
+import Product from "../models/product"
 export const getAllProducts = (req, res) => {
     res.json(products)
 }
@@ -10,18 +6,17 @@ export const getProduct = (req, res) => {
     try {
         const id = req.params.id;
         const product = products.find(item => item.id == id);
-        res.json(product)
+        res.status(200).json({product})
     } catch (error) {
         res.status(400).json({
             message: "Product not found"
         })
     }
 }
-export const addProduct = (req, res) => {
+export const addProduct = async (req, res) => {
     try {
-        const product = req.body;
-        products.push(product);
-        res.json(product);
+        const product = await new Product(req.body).save();
+        res.json(product)
     } catch (error) {
         res.status(400).json({
             message : "Can't add products"
