@@ -31,11 +31,12 @@ export const addProduct = async (req, res) => {
     }
 }
 export const updateProduct = async (req, res) => {
-    const condition = {id : req.params.id}
+    const condition = {_id : req.params.id}
     const update = req.body;
+    const options = {new : true} //defaut : options return False
     try {
-        const product = await Product.findOneAndUpdate(condition, update).exec();
-        res.json(product);
+        const product = await Product.findOneAndUpdate(condition, update, options).exec();
+        res.status(200).json(product);
     } catch (error) {
         res.status(400).json({
             message: "Cập nhật sản phẩm thất bại"
