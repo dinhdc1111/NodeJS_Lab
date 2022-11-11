@@ -30,16 +30,25 @@ export const addProduct = async (req, res) => {
         })
     }
 }
-export const updateProduct = (req, res) => {
-    const id  = req.params.id;
-    const product = req.body;
-    // Find products in the array and update
-    const newProducts = products.map((item) => (item.id == id ? product : item));
-    // Find product in new array and return
-    const currentProduct = newProducts.find(item => item.id == id);
-    res.json(currentProduct)
+export const updateProduct = async (req, res) => {
+    const condition = {id : req.params.id}
+    const update = req.body;
+    try {
+        const product = await Product.findOneAndUpdate(condition, update).exec();
+        res.json(product);
+    } catch (error) {
+        res.status(400).json({
+            message: "Cập nhật sản phẩm thất bại"
+        })
+    }
 }
-export const removeProduct = (req, res) => {
-    const id = req.params.id;
-    res.json(products.filter(item => item.id != id))
+export const removeProduct = async (req, res) => {
+    try {
+        const product = await Product.findByIdAndDelete({_id: req.params.id}).exec();
+        res.json(product);
+    } catch (error) {
+        res.status(400).json({
+            message: "Xóa sản phẩm thất bại"
+        })
+    }
 }
