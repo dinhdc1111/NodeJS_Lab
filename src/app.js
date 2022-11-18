@@ -3,13 +3,15 @@ import morgan from "morgan";
 import mongoose from "mongoose";
 import homeRoute from "./router/homeRoute";
 import productsRoute from "./router/productsRoute"
+import authRoute from "./router/authRoute"
 const app = express();
+// middleware
 app.use(express.json());
 app.use(morgan("tiny"));
-    
 //router
 app.use(homeRoute);
 app.use("/api",productsRoute);
+app.use("/api", authRoute)
 // connection DB
 mongoose.connect('mongodb://localhost:27017/we17201')
     .then(() => console.log("Kết nối database thành công"))
