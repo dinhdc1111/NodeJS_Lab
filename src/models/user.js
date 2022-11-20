@@ -15,6 +15,10 @@ const userSchema = new Schema({
     }
 }, {timestamps: true});
 userSchema.methods = {
+    authenticate(password){
+        return this.password === this.encryptPassword(password);
+        // Mật khẩu trong db === mật khẩu gửi lên được mã hóa
+    },
     encryptPassword(password){
         if(!password){
             return ""
